@@ -86,7 +86,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 1. Clone e instale:
     ```Bash
         git clone https://github.com/DanielMilanez/HAD.git
-        cd HAD
+        cd Diagnostico_Hierarquico
         python -m venv venv
         source ./venv/Scripts/activate
         pip install -r requirements.txt
