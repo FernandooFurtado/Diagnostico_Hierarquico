@@ -1,4 +1,9 @@
-# IA de Diagnóstico Hierárquico para Falhas Aeronáuticas
+
+<div style="text-align: center;">
+  <h2>Diagnóstico Hierárquico para Falhas Aeronáuticas</h2>
+  <img src="img/img01.jpeg" alt="img01.jpeg" width="500"/>
+</div>
+
 
 > Este projeto é um protótipo de um sistema de FID (Fault Detection and Identification) para aeronaves.
 
@@ -72,8 +77,9 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
  │
  ┣ 📁 src/
  │  ┣ 📄 dataset_create.py         
- │  ┣ 📄 models.py                 
- │  ┗ 📄 predict.py                
+ │  ┣ 📄 generate_models.py                 
+ │  ┣ 📄 teste_amostra_manual.py                 
+ │  ┗ 📄 inference.py                
  │
  ┣ 📄 .gitignore
  ┣ 📄 requirements.txt
@@ -118,8 +124,9 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
         python src/inference.py
     ```
 
+Este código é um exemplo de utilização da IA ele irá retornar no terminal do PC um array de 3 parametros com a classificação ja executada. Para deixa-lo mais realista fiz com que fossem escolhidos aleatoriamente 5 linhas do dataset criado.
+
 1. Teste pratico de modelos
     ```
         python src/teste_amostra_manual.py
     ```
-
