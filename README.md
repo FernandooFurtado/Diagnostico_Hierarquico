@@ -42,7 +42,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 ## Organização do projeto
 
 ```bash
-📦 diagnostico_hierarquico/
+📦 HAD/
  ┣ 📁 data/
  │  ┣ 📁 processed/               
  │  ┗ 📁 raw/                      
@@ -71,9 +71,9 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
  │  ┗ 📄 exploratory_analysis.ipynb
  │
  ┣ 📁 src/
- │  ┣ 📄 dataset_create.py         # Criação e pré-processamento do dataset
- │  ┣ 📄 models.py                 # Definição e carregamento dos modelos
- │  ┗ 📄 predict.py                # Pipeline de previsão hierárquica
+ │  ┣ 📄 dataset_create.py         
+ │  ┣ 📄 models.py                 
+ │  ┗ 📄 predict.py                
  │
  ┣ 📄 .gitignore
  ┣ 📄 requirements.txt
@@ -83,27 +83,38 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 
 ## Como rodar a pipeline completa
 
-1. Clone e instale:
+1. Clone e instale o repositório em sua maquina:
     ```Bash
         git clone https://github.com/DanielMilanez/HAD.git
-        cd Diagnostico_Hierarquico
-        python -m venv venv
-        source ./venv/Scripts/activate
-        pip install -r requirements.txt
     ```
-
-1. Gerar o dataset
+1. Acesse o diretório
+   ```Bash
+        cd HAD
+   ```
+1. Crie um ambiente virtual python
+   ```Bash
+        python -m venv venv
+   ```
+1. Ative o ambiente virtual
+   ```Bash
+       source ./venv/Scripts/activate
+   ```
+1. Instale o requirements
+   ```Bash       
+        pip install -r requirements.txt
+   ```
+1. Gerar o dataset, é uma forma que encontrei para compactar o arquivo, não se preocupe com escalonamento e nem com variáveis do tipo string.
     ```Bash
-        python src/dataset_create.py
+        python src/generate_dataset.py
     ```
 
 1. Treinar os modelos
     ```Bash
-        python src/models.py
+        python src/generate_models.py
     ```
 
-1. Fazer o diagnóstico
+1. Fazer o diagnóstico e testar modelos
     ```
-        python src/predict.py
+        python src/inference.py
     ```
 
