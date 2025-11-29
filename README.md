@@ -113,8 +113,13 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
         python src/generate_models.py
     ```
 
-1. Fazer o diagnóstico e testar modelos
+1. Preparar modelos para teste 
     ```
         python src/inference.py
+    ```
+
+1. Teste pratico de modelos
+    ```
+        python src/teste_amostra_manual.py
     ```
 
