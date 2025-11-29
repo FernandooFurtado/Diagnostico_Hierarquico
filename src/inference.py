@@ -7,8 +7,32 @@ import numpy as np
 
 warnings.filterwarnings('ignore', category=FutureWarning)
 
-MODEL_DIR = Path('../models/')
-DATA_FILE = Path('../data/raw/dataset_aircraft_failures.csv') 
+MODEL_DIR = Path('./models/')
+DATA_FILE = Path('./data/raw/dataset_aircraft_failures.csv') 
+
+SENSOR_COLUNAS = [
+    'sensor_volt_gerador_1', 'sensor_volt_gerador_2', 'sensor_corrente_gerador_1', 'sensor_corrente_gerador_2',
+    'sensor_temp_bateria', 'sensor_volt_bateria', 'sensor_freq_sistema_eletrico',
+    'sensor_pressao_hidr_A', 'sensor_pressao_hidr_B', 'sensor_temp_hidr_A', 'sensor_temp_hidr_B',
+    'sensor_nivel_fluido_hidr_A', 'sensor_nivel_fluido_hidr_B',
+    'sensor_fluxo_combustivel_m1', 'sensor_fluxo_combustivel_m2', 'sensor_pressao_combustivel_m1', 'sensor_pressao_combustivel_m2',
+    'sensor_temp_combustivel', 'sensor_nivel_tanque_esq', 'sensor_nivel_tanque_dir',
+    'sensor_N1_motor_1', 'sensor_N2_motor_1', 'sensor_N1_motor_2', 'sensor_N2_motor_2',
+    'sensor_EGT_motor_1', 'sensor_EGT_motor_2',
+    'sensor_temp_oleo_motor_1', 'sensor_temp_oleo_motor_2', 'sensor_pressao_oleo_motor_1', 'sensor_pressao_oleo_motor_2',
+    'sensor_vib_motor_1', 'sensor_vib_motor_2',
+    'sensor_pressao_sangria_ar_m1', 'sensor_pressao_sangria_ar_m2', 'sensor_temp_sangria_ar_m1', 'sensor_temp_sangria_ar_m2',
+    'sensor_temp_cabine', 'sensor_pressao_cabine', 'sensor_altitude_cabine', 'sensor_umidade_cabine',
+    'sensor_temp_ar_condicionado', 'sensor_fluxo_ar_cabine',
+    'sensor_temp_rack_avionico', 'sensor_data_bus_load', 'sensor_integridade_dados', 'sensor_tensao_avionica',
+    'sensor_strain_asa', 'sensor_strain_fuselagem_popa', 'sensor_strain_fuselagem_nariz',
+    'sensor_vib_trem_pouso_baia', 'sensor_vib_trem_pouso_principal', 'sensor_posicao_trem_pouso', 'sensor_posicao_flap',
+    'sensor_posicao_leme', 'sensor_posicao_ailerons', 'sensor_posicao_elevador',
+    'sensor_velocidade_ar', 'sensor_altitude', 'sensor_taxa_subida', 'sensor_pitch', 'sensor_roll',
+    'sensor_yaw', 'sensor_g_load', 'sensor_angulo_ataque', 'sensor_temp_externa',
+    'sensor_gps_latitude', 'sensor_gps_longitude', 'sensor_gps_altitude', 'sensor_velocidade_gps',
+    'sensor_heading_magnetico', 'sensor_heading_gyro'
+]
 
 def normal_data(n_amo):
     data = {
@@ -98,7 +122,7 @@ def normal_data(n_amo):
     return df
 
 def carregar_modelos():
-    print("Carregando arsenal de modelos...")
+    print("Carregando modelos...")
     modelos = {}
     
     modelos['raiz'] = joblib.load(MODEL_DIR / 'nivel1' / 'modelo_raiz.pkl')
@@ -163,81 +187,3 @@ def diagnosticar_falha(amostra_sensores, modelos):
 
     return [pred_n1, pred_n2, pred_n3]
 
-def testar_falha_manual(modelos):
-    print("\n" + "=" * 50)
-    print("INICIANDO DIAGNÓSTICO MANUAL")
-    print("=" * 50)
-
-    df_paciente = normal_data(1)
-    
-    amostra_custom = df_paciente.drop(columns=['nivel1', 'nivel2', 'nivel3']).iloc[0]
-
-    print("Estado ANTES da falha (Normal):")
-    print(f"  Pressão Hidr. A: {amostra_custom['sensor_pressao_hidr_A']:.1f} psi")
-    print(f"  Temp. Hidr. A:   {amostra_custom['sensor_temp_hidr_A']:.1f} C")
-
-    predito = diagnosticar_falha(amostra_custom, modelos)
-    print("\n--- DIAGNÓSTICO DA IA ---")
-    print(f"  {predito[0]} > {predito[1]} > {predito[2]}")
-    
-    amostra_custom['sensor_pressao_hidr_A'] = 50.0
-    amostra_custom['sensor_temp_hidr_A'] = 20.0
-    amostra_custom['sensor_nivel_fluido_hidr_A'] = 94.0 
-
-    print("\nEstado DEPOIS da falha (Injetada):")
-    print(f"  Pressão Hidr. A: {amostra_custom['sensor_pressao_hidr_A']:.1f} psi")
-    print(f"  Temp. Hidr. A:   {amostra_custom['sensor_temp_hidr_A']:.1f} C")
-
-    predito = diagnosticar_falha(amostra_custom, modelos)
-    
-    print("\n--- DIAGNÓSTICO DA IA ---")
-    print(f"  {predito[0]} > {predito[1]} > {predito[2]}")
-
-    if predito[2] == 'FALHA BOMBA A':
-        print("  STATUS: SUCESSO! A IA validou uma falha injetada manualmente.")
-    else:
-        print("  STATUS: FALHA! A IA não identificou a falha injetada.")
-    print("-" * 50)
-
-if __name__ == "__main__":
-    
-    modelos_carregados = carregar_modelos()
-    
-    print(f"Recarregando dados de teste de {DATA_FILE}...")
-    df = pd.read_csv(DATA_FILE)
-    
-    X = df.filter(like='sensor_') 
-    y = df[['nivel1', 'nivel2', 'nivel3']]
-    
-    _, X_test, _, y_test = train_test_split(
-        X, y, 
-        test_size=0.2, 
-        random_state=42, 
-        stratify=y['nivel1']
-    )
-    
-    indices_falha_teste = y_test[y_test['nivel1'] != 'NORMAL'].index
-    
-    amostras_para_teste = indices_falha_teste.to_series().sample(5)
-    
-    print("\n" + "=" * 50)
-    print("INICIANDO DIAGNÓSTICO EM 5 FALHAS ALEATÓRIAS...")
-    print("=" * 50)
-    
-    for i, indice in enumerate(amostras_para_teste):
-        amostra = X_test.loc[indice]
-        real = y_test.loc[indice].values
-        
-        predito = diagnosticar_falha(amostra, modelos_carregados)
-        
-        print(f"\n--- TESTE #{i+1} (Índice da Amostra: {indice}) ---")
-        print(f"  DIAGNÓSTICO REAL:    {real[0]} > {real[1]} > {real[2]}")
-        print(f"  DIAGNÓTICO DA IA:   {predito[0]} > {predito[1]} > {predito[2]}")
-        
-        if list(real) == list(predito):
-            print("  STATUS: ACERTO! (Perfeito)")
-        else:
-            print("  STATUS: ERROU! (Verificar lógica ou treino)")
-        print("-" * 50)
-
-    testar_falha_manual(modelos_carregados)
