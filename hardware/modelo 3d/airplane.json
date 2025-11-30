@@ -1,0 +1,17 @@
+{
+  "ariplane": {
+    "ground_distance": 1.50,
+    "angulation": "LEVEL",
+    "flap_state": "UP",
+    "rpm": 0,
+    "overall_severity": "WARNING",
+    "faults": [
+      {
+        "n1_system": "ESTRUTURA",
+        "n2_subsystem": "ROMPIMENTO",
+        "n3_fault": "PERDA DE PRESSAO",
+        "severity": "WARNING"
+      }
+     ]
+  }
+}

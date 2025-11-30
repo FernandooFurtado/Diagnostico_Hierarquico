@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div id="status-panel">
+        <h4>PARÂMETROS OPERACIONAIS</h4>
+        <hr>
+        <p><strong>Distância ao Solo:</strong> <span id="display-ground-distance">N/A</span></p>
+        <p><strong>Ângulo de Voo:</strong> <span id="display-angulation">N/A</span></p>
+        <p><strong>Estado do Flap:</strong> <span id="display-flap-state">N/A</span></p>
+        <p><strong>RPM do Motor:</strong> <span id="display-rpm">N/A</span></p>
+    </div>
+
+    <div id="labels-container"></div> 
+    
+    <div id="diagnostic-panel">
+        <h3 id="panel-severity">STATUS: NORMAL</h3>
+        <hr>
+        <div id="faults-list">
+            <p>Nenhuma falha detectada.</p>
+        </div>
+    </div>
+
+    <div id="rpm-chart-panel">
+        <h4>VARIAÇÃO DE RPM (Tempo Real)</h4>
+        <canvas id="rpm-canvas" width="280" height="100"></canvas>
+        <div class="chart-labels">
+            <span>0</span>
+            <span id="max-rpm-label">30000</span>
+        </div>
+    </div>
+
+    <div id="json-output-container" style="display:none;"> 
+        <pre id="json-output"></pre>
+    </div>
+    
+    <script type="module" src="./main.js"></script>
+</body>
+</html>
