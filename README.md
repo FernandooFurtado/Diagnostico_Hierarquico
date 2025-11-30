@@ -143,5 +143,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
    ```
         npm run dev
    ```
-5. Abra o diretóro e execute o arquivo conversor.c
-6. Execute o hardware que a conversão automatica do arquivo airplane.json será atualizado conforme o protocolo USART se comunica com a entrada USB.
+5. Abra o diretóro e execute o aplicativo `conversor.exe`
+6. Execute o hardware, a conversão será automatica e tudo será salvo no arquivo airplane.json será atualizado conforme o protocolo USART se comunica com a entrada USB.
+
+OBS.: Caso haja algum probelma abra o arquivo `conversor.c` e altere a macro para a porta que o concetror USART/USB está conectado, para descobrir qual é a porta, acesse o gerenciador de dispositivos e procure pelo adapatador USART/USB.
