@@ -102,7 +102,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 
 1. Clone e instale o repositório em sua maquina:
     ```Bash
-        git clone https://github.com/DanielMilanez/HAD.git
+        git clone https://github.com/FernandooFurtado/Diagnostico_Hierarquico.git
     ```
 1. Acesse o diretório
    ```Bash
