@@ -83,9 +83,9 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
  │  │  ┗ 📄 exploratory_analysis.ipynb
  │  │
  │  ┣ 📁 src/
- │  │  ┣ 📄 dataset_create.py         
- │  │  ┣ 📄 models.py                 
- │  ┗  ┗ 📄 predict.py                
+ │  │  ┣ 📄 generate_dataset.py         
+ │  │  ┣ 📄 inference.py                 
+ │  ┗  ┗ 📄 generate_models.py                
  │
  ┣ 📄 .gitignore
  ┣ 📄 requirements.txt
