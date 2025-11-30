@@ -43,7 +43,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 ## Organização do projeto
 
 ```bash
-📁 HAD/
+📁 Diagnostico_Hierarquico/
  ┣ 📁 hardware/
  │  ┣ 📁 front-end/
  │  │   ┣ 📁 fonts
