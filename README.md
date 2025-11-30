@@ -106,7 +106,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
     ```
 1. Acesse o diretório
    ```Bash
-        cd HAD
+        cd Diagnostico_Hierarquico
    ```
 1. Crie um ambiente virtual python
    ```Bash
