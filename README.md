@@ -1,7 +1,7 @@
 
 <div style="text-align: center;">
-  <h2>Diagnóstico Hierárquico para Falhas Aeronáuticas</h2>
-  <img src="img/img01.jpeg" alt="img01.jpeg" width="500"/>
+<h2>Diagnóstico Hierárquico para Falhas Aeronáuticas</h2>
+<img src="img/img01.jpeg" alt="img01.jpeg" width="500"/>
 </div>
 
 
@@ -47,39 +47,50 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 ## Organização do projeto
 
 ```bash
-📦 HAD/
- ┣ 📁 data/
- │  ┣ 📁 processed/               
- │  ┗ 📁 raw/                      
- │     ┗ 📄 dataset_aircraft_failures.csv
- │
- ┣ 📁 models/
- │  ┣ 📁 nivel1/
- │  │  ┗ 📄 modelo_raiz.pkl
- │  ┣ 📁 nivel2/
- │  │  ┣ 📄 modelo_estrutural.pkl
- │  │  ┗ 📄 modelo_sistemas.pkl
- │  ┗ 📁 nivel3/
- │     ┣ 📄 modelo_asa.pkl
- │     ┣ 📄 modelo_avionica.pkl
- │     ┣ 📄 modelo_cabine.pkl
- │     ┣ 📄 modelo_combustivel.pkl
- │     ┣ 📄 modelo_controles_de_voo.pkl
- │     ┣ 📄 modelo_eletrico.pkl
- │     ┣ 📄 modelo_fuselagem.pkl
- │     ┣ 📄 modelo_hidraulico.pkl
- │     ┣ 📄 modelo_motor.pkl
- │     ┣ 📄 modelo_pneumatico.pkl
- │     ┗ 📄 modelo_trem_de_pouso.pkl
- │
- ┣ 📁 notebooks/
- │  ┗ 📄 exploratory_analysis.ipynb
- │
- ┣ 📁 src/
- │  ┣ 📄 dataset_create.py         
- │  ┣ 📄 generate_models.py                 
- │  ┣ 📄 teste_amostra_manual.py                 
- │  ┗ 📄 inference.py                
+📁 Diagnostico_Hierarquico/
+ ┣ 📁 img/
+ ┣ 📁 hardware/
+ │  ┣ 📁 front-end/
+ │  │   ┣ 📁 fonts
+ │  │   ┣ 📁 node_modules
+ │  │   ┣ 📄 airplane.json
+ │  │   ┣ 📄 index.html
+ │  │   ┣ 📄 main.js
+ │  │   ┣ 📄 package.json
+ │  │   ┗ 📄 package-lock.json
+ │  ┗ 📄 conversor.c   
+ ┣ 📁 modelo/
+ │  ┣ 📁 data/
+ │  │  ┣ 📁 processed/               
+ │  │  ┗ 📁 raw/                      
+ │  │     ┗ 📄 dataset_aircraft_failures.csv
+ │  │
+ │  ┣ 📁 models/
+ │  │  ┣ 📁 nivel1/
+ │  │  │  ┗ 📄 modelo_raiz.pkl
+ │  │  ┣ 📁 nivel2/
+ │  │  │  ┣ 📄 modelo_estrutural.pkl
+ │  │  │  ┗ 📄 modelo_sistemas.pkl
+ │  │  ┗ 📁 nivel3/
+ │  │     ┣ 📄 modelo_asa.pkl
+ │  │     ┣ 📄 modelo_avionica.pkl
+ │  │     ┣ 📄 modelo_cabine.pkl
+ │  │     ┣ 📄 modelo_combustivel.pkl
+ │  │     ┣ 📄 modelo_controles_de_voo.pkl
+ │  │     ┣ 📄 modelo_eletrico.pkl
+ │  │     ┣ 📄 modelo_fuselagem.pkl
+ │  │     ┣ 📄 modelo_hidraulico.pkl
+ │  │     ┣ 📄 modelo_motor.pkl
+ │  │     ┣ 📄 modelo_pneumatico.pkl
+ │  │     ┗ 📄 modelo_trem_de_pouso.pkl
+ │  │
+ │  ┣ 📁 notebooks/
+ │  │  ┗ 📄 exploratory_analysis.ipynb
+ │  │
+ │  ┣ 📁 src/
+ │  │  ┣ 📄 dataset_create.py         
+ │  │  ┣ 📄 models.py                 
+ │  ┗  ┗ 📄 predict.py                
  │
  ┣ 📄 .gitignore
  ┣ 📄 requirements.txt
@@ -119,14 +130,28 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
         python src/generate_models.py
     ```
 
-1. Preparar modelos para teste 
+1. Fazer o diagnóstico e testar modelos
     ```
         python src/inference.py
     ```
 
-Este código é um exemplo de utilização da IA ele irá retornar no terminal do PC um array de 3 parametros com a classificação ja executada. Para deixa-lo mais realista fiz com que fossem escolhidos aleatoriamente 5 linhas do dataset criado.
+## Como testar o arquivo do modelo 3D
 
-1. Teste pratico de modelos
+1. Instale em sua maquina o [node js](https://nodejs.org/pt)
+1. Acesse o diretório hardware/front-end
+2. Abra o cmd neste diretório
+3. Execite o comando serve para permitir que o windows aceite comandos do npm 
+   ```
+        Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
     ```
-        python src/teste_amostra_manual.py
-    ```
+4. Rode o servidor
+   ```
+        npm run dev
+   ```
+5. Copie o link gerado e abra um navegador e cole-o na URL 
+<div style="text-align: center;">
+<img src="img/localhost.png" alt="localhost.png" width="500"/>
+</div>
+
+
+Como o hardware não está em sua posse, para verificar o funcionamento manipule os parametros do arquio json e veja o resultado, para demonstrar legendas precione a tecla de espaço, a IA nessa versão do front-end não está integrada, afinal sem o hardware não tem o porque utilizar essa versão simplificada.
