@@ -1,13 +1,7 @@
-
-<div style="text-align: center;">
-<h2>Diagnóstico Hierárquico para Falhas Aeronáuticas</h2>
-<img src="img/img01.jpeg" alt="img01.jpeg" width="500"/>
-</div>
-
+# IA de Diagnóstico Hierárquico para Falhas Aeronáuticas
 
 > Este projeto é um protótipo de um sistema de FID (Fault Detection and Identification) para aeronaves.
 
-[Acesse o vídeo no youtube para melhor explicação](https://www.youtube.com/watch?v=6BKYYs_KToA)
 
 Em vez de usar um modelo de IA "monolítico", esta arquitetura usa um total de 14 modelos especialistas (RandomForestClassifier) em uma cascata de 3 níveis. O objetivo é imitar o processo de diagnóstico de um engenheiro de manutenção: começar pelo sistema principal, ir para o subsistema e, finalmente, isolar o componente com falha.
 
@@ -49,8 +43,7 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 ## Organização do projeto
 
 ```bash
-📁 Diagnostico_Hierarquico/
- ┣ 📁 img/
+📁 HAD/
  ┣ 📁 hardware/
  │  ┣ 📁 front-end/
  │  │   ┣ 📁 fonts
@@ -104,11 +97,11 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
 
 1. Clone e instale o repositório em sua maquina:
     ```Bash
-        git clone https://github.com/FernandooFurtado/Diagnostico_Hierarquico.git
+        git clone https://github.com/DanielMilanez/HAD.git
     ```
 1. Acesse o diretório
    ```Bash
-        cd Diagnostico_Hierarquico
+        cd HAD
    ```
 1. Crie um ambiente virtual python
    ```Bash
@@ -150,10 +143,5 @@ Esses parâmetros representam medidas típicas coletadas por sistemas embarcados
    ```
         npm run dev
    ```
-5. Copie o link gerado e abra um navegador e cole-o na URL 
-<div style="text-align: center;">
-<img src="img/localhost.png" alt="localhost.png" width="500"/>
-</div>
-
-
-Como o hardware não está em sua posse, para verificar o funcionamento manipule os parametros do arquio json e veja o resultado, para demonstrar legendas precione a tecla de espaço, a IA nessa versão do front-end não está integrada, afinal sem o hardware não tem o porque utilizar essa versão simplificada.
+5. Abra o diretóro e execute o arquivo conversor.c
+6. Execute o hardware que a conversão automatica do arquivo airplane.json será atualizado conforme o protocolo USART se comunica com a entrada USB.
